@@ -64,10 +64,10 @@ public class CubeInputsController : MonoBehaviour
 
     public bool ReleaseMovementInput()
     {
-        if(Input.GetKeyDown(releaseMovementKey))
+        if(Input.GetKeyDown(releaseMovementKey) && isLocked)
         {
             movementInputs = Vector3.zero;
-            GameController.Instance.SpawnerController.ReleaseCube();
+            GameController.Instance.ReleaseCubeEvents();
             isLocked = false;
         }
 

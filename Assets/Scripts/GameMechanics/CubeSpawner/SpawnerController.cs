@@ -12,13 +12,13 @@ public class SpawnerController : MonoBehaviour
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private Transform spawnPoint;
 
-
     private GameObject currentCube;
 
     private Coroutine spawnCo;
 
     public event Action OnCubeReleased;
 
+    
     private void OnEnable()
     {
         OnCubeReleased -= SpawnCube;
@@ -33,11 +33,6 @@ public class SpawnerController : MonoBehaviour
     private void Start()
     {
         SpawnCube();
-    }
-
-    public void ReleaseCube()
-    {
-        OnCubeReleased?.Invoke();
     }
 
     private void SpawnCube()
@@ -55,10 +50,26 @@ public class SpawnerController : MonoBehaviour
         yield return new WaitForSeconds(spawnInterval);
 
         currentCube = Instantiate(cubePrefab, spawnPoint.transform.position, Quaternion.identity);
+
+        if(currentCube != null)
+        {
+            currentCube.GetComponent<CubeController>().CubeSoundController.PlayCubeInstantiateSound();
+        }
     }
 
     public void AddSpawnHeight(Vector3 offset)
     {
         spawnPoint.position += offset;
+    }
+
+
+    public void TriggerReleaseCube()
+    {
+        OnCubeReleased?.Invoke();
+
+        if (currentCube != null)
+        {
+            currentCube.GetComponent<CubeController>().CubeSoundController.PlayCubeFallSound();
+        }
     }
 }

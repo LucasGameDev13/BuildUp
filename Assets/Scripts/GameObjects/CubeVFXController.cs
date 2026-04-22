@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class CubeVFXController : MonoBehaviour
 {
+    [Header("Cube Size Sorting Settings")]
     [SerializeField] private float maxXValue;
     [SerializeField] private float maxYValue;
     [SerializeField] private float maxZValue;
+
+    [Header("Cube Feedback Direction Settings")]
+    [SerializeField] private GameObject cubeLaserFeedbackVisual;
+
     private MeshRenderer mesh;
 
     private void Awake()
@@ -35,6 +40,14 @@ public class CubeVFXController : MonoBehaviour
         {
             Color randomColor = new Color(Random.value, Random.value, Random.value);
             mesh.material.color = randomColor;
+        }
+    }
+
+    public void TriggerVisualFeedBack(bool _value)
+    {
+        if(cubeLaserFeedbackVisual  != null)
+        {
+            cubeLaserFeedbackVisual.SetActive(_value);
         }
     }
 }

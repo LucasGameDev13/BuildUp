@@ -6,7 +6,8 @@ using UnityEngine;
 public class SpawnerHighController : MonoBehaviour
 {
     private CubeController cubeToAnalyse;
-    private SpawnerController spawnerController;
+    private BoxCollider myColliderLimits;
+    [SerializeField]private SpawnerController spawnerController;
 
     [Header("Spawner Settings")]
     [SerializeField] private Vector3 spawnOffSet;
@@ -16,7 +17,10 @@ public class SpawnerHighController : MonoBehaviour
 
     private void Awake()
     {
-        spawnerController = GetComponentInParent<SpawnerController>();
+        if(spawnerController == null)
+            spawnerController = GetComponent<SpawnerController>();
+
+        myColliderLimits = GetComponent<BoxCollider>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -25,9 +29,15 @@ public class SpawnerHighController : MonoBehaviour
 
         if (cubeToAnalyse == null) return;
 
+        if (cubeToAnalyse.MovementController == null) return;
+
+        if (cubeToAnalyse.MovementController.Rb == null) return;
+
         Rigidbody cubeRb = cubeToAnalyse.MovementController.Rb;
 
         if (cubeRb.isKinematic && !cubeToAnalyse.IsConsiderableCube) { return; }
+
+        cubeToAnalyse.MovementController.SetMovementBounds(myColliderLimits.bounds);
 
         float velocityY = Mathf.Abs(cubeRb.velocity.y);
 
@@ -38,12 +48,18 @@ public class SpawnerHighController : MonoBehaviour
         if (timer >= checkInterval)
         {
             spawnerController.AddSpawnHeight(spawnOffSet);
+
             timer = 0f;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        cubeToAnalyse.IsConsiderableCube = true;
+        CubeController cube = other.GetComponent<CubeController>();
+
+        if (cube != null)
+        {
+            cube.IsConsiderableCube = true;
+        }
     }
 }
