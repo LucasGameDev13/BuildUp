@@ -196,8 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2466a2365e65a04e9dd6224ed28af8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notInteraction: VFX
   baseInteraction: Base
   cubeInteraction: Cube
+  waterInteraction: Water
 --- !u!114 &4808876116458976307
 MonoBehaviour:
   m_ObjectHideFlags: 0

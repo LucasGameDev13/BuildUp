@@ -5,9 +5,9 @@ using UnityEngine;
 public class CubeCollisionController : MonoBehaviour
 {
     private CubeController cubeController;
-
     [SerializeField] private string baseInteraction;
     [SerializeField] private string cubeInteraction;
+    [SerializeField] private string waterInteraction;
 
     private void Awake()
     {

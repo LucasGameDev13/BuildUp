@@ -45,4 +45,13 @@ public class GameController : MonoBehaviour
         spawnerController.TriggerReleaseCube();
     }
 
+    public void ReleaseGameOverPanel()
+    {
+        uiController.TriggerGameOverScreen(true);
+    }
+
+    public float GetGameOverDelay()
+    {
+        return uiController.GameOverDelay;
+    }
 }

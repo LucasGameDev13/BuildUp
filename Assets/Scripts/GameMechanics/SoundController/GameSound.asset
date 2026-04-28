@@ -22,4 +22,7 @@ MonoBehaviour:
   - soundName: Collision_Sound_Cube
     soundClip: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
     soundVolume: 1
-  gameFeelSounds: []
+  gameFeelSounds:
+  - soundName: Gameover_Sound
+    soundClip: {fileID: 8300000, guid: 6063240a54012a34ea7f6e1a2e475912, type: 3}
+    soundVolume: 1

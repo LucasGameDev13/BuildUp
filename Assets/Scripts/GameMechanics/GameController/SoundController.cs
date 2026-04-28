@@ -5,6 +5,8 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private GameSoundDataSO soundDataSO;
+    [SerializeField] private string gameOverSound;
+    [SerializeField] private AudioSource gameAudioSource;
 
     public void PlaySound(string soundName, AudioSource audioSource)    
     {
@@ -21,5 +23,10 @@ public class SoundController : MonoBehaviour
 
             audioSource.Play();
         }
+    }
+
+    public void PlayGameOverSound()
+    {
+        PlaySound(gameOverSound, gameAudioSource);
     }
 }
