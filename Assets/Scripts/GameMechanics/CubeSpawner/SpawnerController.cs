@@ -16,23 +16,18 @@ public class SpawnerController : MonoBehaviour
 
     private Coroutine spawnCo;
 
-    public event Action OnCubeReleased;
-
     
     private void OnEnable()
     {
-        OnCubeReleased -= SpawnCube;
-        OnCubeReleased += SpawnCube;
+        if(GameController.Instance == null) return;
+        GameController.Instance.OnReleasedCube -= TriggerReleaseCube;
+        GameController.Instance.OnReleasedCube += TriggerReleaseCube;
     }
 
     private void OnDisable()
     {
-        OnCubeReleased -= SpawnCube;
-    }
-
-    private void Start()
-    {
-        SpawnCube();
+        if (GameController.Instance == null) return;
+        GameController.Instance.OnReleasedCube -= TriggerReleaseCube;
     }
 
     private void SpawnCube()
@@ -63,9 +58,9 @@ public class SpawnerController : MonoBehaviour
     }
 
 
-    public void TriggerReleaseCube()
+    private void TriggerReleaseCube()
     {
-        OnCubeReleased?.Invoke();
+        SpawnCube();
 
         if (currentCube != null)
         {

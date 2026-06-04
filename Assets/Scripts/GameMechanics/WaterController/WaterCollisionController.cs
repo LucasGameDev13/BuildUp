@@ -10,11 +10,16 @@ public class WaterCollisionController : MonoBehaviour
 
         if(cubeController == null) { return; }
 
-        Invoke(nameof(GameOver), GameController.Instance.GetGameOverDelay());
+        Invoke(nameof(GameOver), GameOverDelay());
+    }
+
+    private float GameOverDelay()
+    {
+        return GameController.Instance.GetGameOverDelay();
     }
 
     private void GameOver()
     {
-        GameController.Instance.ReleaseGameOverPanel();
+        GameController.Instance.ReleaseGameOver();
     }
 }
