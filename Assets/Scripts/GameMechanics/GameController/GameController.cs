@@ -17,6 +17,7 @@ public class GameController : Singleton<GameController>
     public SceneController SceneController => sceneController;
     public UIController UIController => uiController;
     public SoundController SoundController => soundController;
+    public CloudServices CloudServices => cloudServices;
 
     public Action OnReleasedCube;
 
@@ -36,13 +37,15 @@ public class GameController : Singleton<GameController>
         if (sceneController != null) sceneController.OnSceneLoaded += HandleSceneLoaded;
 
         if (uiController == null) return;
+
         uiController.SetButtonFunctionality(UIButtonType.PlayButton, () => PlayGame());
         uiController.SetButtonFunctionality(UIButtonType.HomeButton, () => HomeGame());
-        uiController.SetButtonFunctionality(UIButtonType.RankingButton, () => uiController.SetupRankingScreen());
+        uiController.SetButtonFunctionality(UIButtonType.RankingButton, async () => { uiController.SetupRankingScreen(); await uiController.SetupRankingText(cloudServices);});
         uiController.SetButtonFunctionality(UIButtonType.UserButton, () => uiController.SetupUserScreen());
         uiController.SetButtonFunctionality(UIButtonType.AcceptButton, () => uiController.CloseCurrentPopup());
         uiController.SetButtonFunctionality(UIButtonType.BackButton, () => uiController.CloseCurrentPopup());
         uiController.SetButtonFunctionality(UIButtonType.CancelButton, () => uiController.CloseCurrentPopup());
+        uiController.SetButtonFunctionality(UIButtonType.QuitButton, () => gameLevelController.QuitGame());
     }
 
     private void Start()
@@ -56,6 +59,7 @@ public class GameController : Singleton<GameController>
         if (sceneController != null) sceneController.OnSceneLoaded -= HandleSceneLoaded;
 
         if (uiController == null) return;
+
         uiController.RemoveButtonFunctionality(UIButtonType.PlayButton);
         uiController.RemoveButtonFunctionality(UIButtonType.HomeButton);
         uiController.RemoveButtonFunctionality(UIButtonType.RankingButton);
@@ -63,6 +67,7 @@ public class GameController : Singleton<GameController>
         uiController.RemoveButtonFunctionality(UIButtonType.AcceptButton);
         uiController.RemoveButtonFunctionality(UIButtonType.BackButton);
         uiController.RemoveButtonFunctionality(UIButtonType.CancelButton);
+        uiController.RemoveButtonFunctionality(UIButtonType.QuitButton);
     }
 
     private void HandleSceneLoaded(int sceneIndex)
@@ -73,13 +78,13 @@ public class GameController : Singleton<GameController>
         {
             case 0:
                 uiController.SetupHomeScreen();
-                GameController.Instance.SoundController.PlayBackgroundMusicHome();
+                soundController.PlayBackgroundMusicHome();
                 break;
 
             case 1:
                 uiController.SetupScoreScreen();
                 OnReleasedCube?.Invoke();
-                GameController.Instance.SoundController.PlayBackgroundMusicGamePlay();
+                soundController.PlayBackgroundMusicGamePlay();
                 break;
         }
     }

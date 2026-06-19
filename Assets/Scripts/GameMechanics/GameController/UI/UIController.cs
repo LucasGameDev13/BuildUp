@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,8 +23,8 @@ public class UIController : MonoBehaviour
 
     [Header("UI Ranking Settings")]
     [SerializeField] private GameObject rankingPanel;
-    [SerializeField] private List<TextMeshProUGUI> rankingScoreText = new List<TextMeshProUGUI>();
-    [SerializeField] private List<TextMeshProUGUI> rankingNameText = new List<TextMeshProUGUI>();
+    [SerializeField] private RankingInfoToolTip rankingInfoToolTip;
+    [SerializeField] private Transform rankingContainer;
 
     [Header("UI Game Over Settings")]
     [SerializeField] private GameObject gameOverPanel;
@@ -70,9 +71,27 @@ public class UIController : MonoBehaviour
         scoreText.text = _scoreValue.ToString();
     }
 
-    public void SetupRankingText()
+    public async Task SetupRankingText(CloudServices cloudService)
     {
+        foreach(Transform child in rankingContainer)
+        {
+            Destroy(child.gameObject);
+        }
 
+        List<PlayerRanking> players = await cloudService.GetScores();
+
+        if (this == null || rankingInfoToolTip == null) return;
+
+        foreach (PlayerRanking playersRanking in players)
+        {
+            RankingInfoToolTip newRankingInfo = Instantiate(rankingInfoToolTip, rankingContainer);
+            newRankingInfo.InitializeTooltip(playersRanking.position + 1, playersRanking.userName, playersRanking.score);
+        }
+    }
+
+    public void SetupHomeRecordScoreText(int score)
+    {
+        homeRecordScoreText.text = "My Record: - " + score.ToString();
     }
 
     public void SetupUserNameText(string userName)
@@ -152,7 +171,6 @@ public enum UIButtonType
     PlayButton,
     HomeButton,
     UserButton,
-    RemoveAdsButton,
     RankingButton,
     QuitButton, 
     BackButton,

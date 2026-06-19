@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Leaderboards;
+using Unity.Services.Leaderboards.Models;
 using UnityEngine;
 
 public class CloudServices : MonoBehaviour
 {
     [SerializeField] private GameObject erroLoginPopup;
+    [SerializeField] private string scoreTableLeaderboardID = "RankingScore";
+
 
     public async void InitializeLoginConnectionVerification()
     {
@@ -16,6 +21,7 @@ public class CloudServices : MonoBehaviour
             await UnityServices.InitializeAsync();
             await SignInAnonymouslyAsync();
             UpdateUserNameUIInfos();
+            GameController.Instance.UIController.SetupHomeRecordScoreText(await GetPlayerScore());
         }
         catch(Exception ex)
         {
@@ -56,7 +62,6 @@ public class CloudServices : MonoBehaviour
         await AuthenticationService.Instance.UpdatePlayerNameAsync(userName);
     }
 
-
     private void UpdateUserNameUIInfos()
     {
         string name = AuthenticationService.Instance.PlayerName;
@@ -69,4 +74,66 @@ public class CloudServices : MonoBehaviour
         await UpdateUserName(newName.text);
         UpdateUserNameUIInfos();
     }
+
+
+
+
+
+
+    public async void SaveScore(int score)
+    {
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(scoreTableLeaderboardID, score);
+    }
+
+    public async Task<List<PlayerRanking>> GetScores()
+    {
+        var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync(scoreTableLeaderboardID);
+        
+        List<PlayerRanking> playerRankings = new List<PlayerRanking>();
+
+        foreach (LeaderboardEntry entry in scoresResponse.Results)
+        {
+            PlayerRanking ranking = new PlayerRanking();
+
+            ranking.position = entry.Rank;
+            ranking.userName = entry.PlayerName.Substring(0, entry.PlayerName.IndexOf("#"));
+            ranking.score = (int)entry.Score;
+
+            playerRankings.Add(ranking);
+        }
+
+        return playerRankings;
+    }
+    
+    private async Task<int> GetPlayerScore()
+    {
+        try
+        {
+            var result = await LeaderboardsService.Instance.GetPlayerScoreAsync(scoreTableLeaderboardID);
+            return (int) result.Score;  
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    [ContextMenu("Force New Player (TEST ONLY)")]
+    public void ForceNewPlayer()
+    {
+        AuthenticationService.Instance.ClearSessionToken();
+        AuthenticationService.Instance.SignOut();
+        Debug.Log("Token limpo! Reinicie o jogo para gerar novo Player ID.");
+    }
+
 }
+
+
+[Serializable]
+public class PlayerRanking
+{
+    public int position;
+    public string userName;
+    public int score;
+}
+

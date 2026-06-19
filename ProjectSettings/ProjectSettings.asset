@@ -908,13 +908,13 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: e52381a7-1c0e-4be8-9052-ae7572fac45b
+  cloudProjectId: c9cd65d0-2029-46de-8381-5debf268bb0b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: BuildUp
-  organizationId: lucasoniria_2026
+  organizationId: lucas_gomes011
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

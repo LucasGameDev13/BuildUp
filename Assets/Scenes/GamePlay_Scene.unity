@@ -1003,6 +1003,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 5227322262120532354, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227322262120532354, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227322262120532354, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227322262120532354, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227322262120532354, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971014975434237984, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971014975434237984, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971014975434237984, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971014975434237984, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971014975434237984, guid: 82d0e340717b4b94f952db459d888513,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7205448273045439290, guid: 82d0e340717b4b94f952db459d888513,
         type: 3}
       propertyPath: sceneIndex

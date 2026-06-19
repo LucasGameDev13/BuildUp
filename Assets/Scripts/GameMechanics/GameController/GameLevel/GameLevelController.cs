@@ -52,35 +52,42 @@ public class GameLevelController : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
     public void PlayGame()
     {
         ResetScore();
-        ChanceScene(GameplaySceneIndex);
+        ChangeScene(GameplaySceneIndex);
     }
+
     private void UpdateScore()
     {
         currentScore += scorePerCube;
         GameController.Instance.UIController.SetupScoreText(currentScore);
     }
+
     private void GameOver(bool _isGameOver = false)
     {
         if (!_isGameOver) { return; }
         GameController.Instance.SoundController.PlayGameOverSound();
         GameController.Instance.UIController.SetupGameOverScoreText();
         GameController.Instance.UIController.SetupGameOverScreen();
+        GameController.Instance.CloudServices.SaveScore(currentScore);
         Time.timeScale = 0f;
     }
     public void ReturnHome()
     {
-        ChanceScene(HomeSceneIndex);
+        ChangeScene(HomeSceneIndex);
     }
 
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
 
-
-
-
-
-    private void ChanceScene(int index)
+    private void ChangeScene(int index)
     {
         GameController.Instance.SceneController.ChangeScene(index);
     }
@@ -90,11 +97,6 @@ public class GameLevelController : MonoBehaviour
         currentScore = 0;
         GameController.Instance.UIController.SetupScoreText(currentScore);
     }
-
-
-
-
-
 
     public void TriggerScoreChange()
     {
