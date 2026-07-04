@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_InputField userNameInputField;
 
     [Header("UI Game Score Settings")]
-    [SerializeField] private GameObject scorePanel;
+    [SerializeField] private GameObject hudPanel;
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [Header("UI Ranking Settings")]
@@ -57,7 +57,7 @@ public class UIController : MonoBehaviour
     public void SetupScoreScreen()
     {
 
-        OpenScreen(scorePanel);
+        OpenScreen(hudPanel);
     }
 
     public void SetupGameOverScreen()

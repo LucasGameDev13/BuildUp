@@ -450,8 +450,8 @@ MonoBehaviour:
   m_RecenterTarget: 0
   m_VerticalAxis:
     Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 150
+    m_SpeedMode: 1
+    m_MaxSpeed: 50
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -474,8 +474,8 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
     Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 150
+    m_SpeedMode: 1
+    m_MaxSpeed: 50
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -878,6 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1152810131}
   - component: {fileID: 1152810130}
+  - component: {fileID: 1152810132}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -940,6 +941,22 @@ Transform:
   - {fileID: 258232008}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1152810132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152810129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: -1
+  AutoEnableInputs: 1
+  XYAxis: {fileID: -917832467450947246, guid: 387d819508016944e9f78ce1ffbcdad8, type: 3}
+  ZAxis: {fileID: 0}
 --- !u!1001 &1184129507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1052,11 +1069,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7205448273045439290, guid: 82d0e340717b4b94f952db459d888513,
-        type: 3}
-      propertyPath: sceneIndex
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

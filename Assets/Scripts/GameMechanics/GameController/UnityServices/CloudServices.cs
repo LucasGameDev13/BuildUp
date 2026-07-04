@@ -75,11 +75,6 @@ public class CloudServices : MonoBehaviour
         UpdateUserNameUIInfos();
     }
 
-
-
-
-
-
     public async void SaveScore(int score)
     {
         await LeaderboardsService.Instance.AddPlayerScoreAsync(scoreTableLeaderboardID, score);

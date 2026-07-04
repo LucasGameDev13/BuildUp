@@ -19,7 +19,7 @@
                     "type": "Value",
                     "id": "1fdcd892-a2aa-42cb-affc-6dd4bd0dc225",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "DeltaTime",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -57,7 +57,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "f08fb324-f33d-4e1d-937a-c680cc47253b",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -68,7 +68,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "830e90be-bdb7-4e3f-b98f-1e2af4066e2c",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -79,7 +79,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
+                    "name": "Left",
                     "id": "5995ec47-cd9d-4a2e-bea5-c367d9c9acb2",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -90,8 +90,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "6a5ece5b-22e5-4d8e-9524-394c323145c9",
+                    "name": "Right",
+                    "id": "47c9359b-36aa-477c-ad87-8071d744b648",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",

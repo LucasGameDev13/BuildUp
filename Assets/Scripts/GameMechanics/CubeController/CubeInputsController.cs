@@ -6,57 +6,32 @@ using UnityEngine;
 
 public class CubeInputsController : MonoBehaviour
 {
-    [Header("Movement Keys")]
-    [SerializeField] private KeyCode rightMovementKey = KeyCode.D;
-    [SerializeField] private KeyCode leftMovementKey = KeyCode.A;
-    [SerializeField] private KeyCode forwardMovementKey = KeyCode.W;
-    [SerializeField] private KeyCode backwardMovementKey = KeyCode.S;
-    [SerializeField] private KeyCode releaseMovementKey = KeyCode.Space;
     private bool isLocked = true;
-
-
+    private InputsSystemController inputSystemActions;
     private Vector3 movementInputs;
+
+    private void Awake()
+    {
+        inputSystemActions = new InputsSystemController();
+    }
+
+    private void OnEnable()
+    {
+        inputSystemActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputSystemActions.Disable();
+    }
 
     public Vector3 MovementInputs()
     {
         if (isLocked)
         {
-            if (Input.GetKey(rightMovementKey))
-            {
-                movementInputs = Vector3.right;
-            }
-            if (Input.GetKeyUp(rightMovementKey))
-            {
-                movementInputs = Vector3.zero;
-            }
+            Vector2 rawInput = inputSystemActions.Player.MoveCube.ReadValue<Vector2>();
 
-            if (Input.GetKey(leftMovementKey))
-            {
-                movementInputs = Vector3.left;
-            }
-            if (Input.GetKeyUp(leftMovementKey))
-            {
-                movementInputs = Vector3.zero;
-            }
-
-            if (Input.GetKey(forwardMovementKey))
-            {
-                movementInputs = Vector3.forward;
-            }
-            if (Input.GetKeyUp(forwardMovementKey))
-            {
-                movementInputs = Vector3.zero;
-            }
-
-            if (Input.GetKey(backwardMovementKey))
-            {
-                movementInputs = Vector3.back;
-            }
-            if (Input.GetKeyUp(backwardMovementKey))
-            {
-                movementInputs = Vector3.zero;
-            }
-
+            movementInputs = new Vector3(rawInput.x, 0f, rawInput.y);
         }
 
         return movementInputs;
@@ -64,12 +39,13 @@ public class CubeInputsController : MonoBehaviour
 
     public bool ReleaseMovementInput()
     {
-        if(Input.GetKeyDown(releaseMovementKey) && isLocked)
+        if (inputSystemActions.Player.ReleaseCube.WasPressedThisFrame() && isLocked)
         {
             movementInputs = Vector3.zero;
             GameController.Instance.ReleaseCubeEvents();
             isLocked = false;
         }
+
 
         return isLocked;
     }
