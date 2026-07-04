@@ -119,7 +119,9 @@ public class UIController : MonoBehaviour
 
         currentScreen = screen;
         currentScreen.SetActive(true);
+        CloseCurrentPopup();
     }
+
 
     public void OpenPopup(GameObject popup)
     {
