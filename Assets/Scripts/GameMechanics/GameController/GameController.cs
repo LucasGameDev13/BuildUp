@@ -98,6 +98,7 @@ public class GameController : Singleton<GameController>
     private void HomeGame()
     {
         gameLevelController.ReturnHome();
+        cloudServices.InitializeLoginConnectionVerification();
     }
 
     public void ReleaseCubeEvents()
